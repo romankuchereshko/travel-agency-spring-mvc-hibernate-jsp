@@ -1,15 +1,11 @@
 package com.travel.agency.dao;
 
 import com.travel.agency.model.Booking;
-import com.travel.agency.model.User;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.Session;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.transaction.Transactional;
 import java.io.Serializable;
 import java.util.List;
 
@@ -17,12 +13,15 @@ import java.util.List;
 @Slf4j
 public class BookingDaoImpl implements BookingDao {
 
-    @PersistenceContext
-    private EntityManager entityManager;
+    private SessionFactory sessionFactory;
+
+    public BookingDaoImpl(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
+    }
 
     @Override
     public boolean save(Booking booking) {
-        Serializable serializable = entityManager.unwrap(Session.class).save(booking);
+        Serializable serializable = sessionFactory.getCurrentSession().save(booking);
         if (serializable != null) {
             log.info("Booked successfully! " + booking);
             return true;
@@ -32,22 +31,29 @@ public class BookingDaoImpl implements BookingDao {
 
     @Override
     public Booking read(Long id) {
-        return entityManager.find(Booking.class, id);
+        return sessionFactory.getCurrentSession().load(Booking.class, id);
     }
 
     @Override
     public void delete(Long id) {
-        Booking booking = entityManager.find(Booking.class, id);
+        Booking booking = sessionFactory.getCurrentSession().load(Booking.class, id);
 
         if (booking != null) {
-            entityManager.remove(booking);
+            sessionFactory.getCurrentSession().delete(booking);
         }
         log.info("Booking canceled successfully! " + booking);
     }
 
-    @SuppressWarnings("unchecked")
     @Override
     public List<Booking> getAllBookings() {
-        return entityManager.createQuery("SELECT b FROM Booking b ORDER BY b.id", Booking.class).getResultList();
+        return sessionFactory.getCurrentSession()
+                .createQuery("SELECT b FROM Booking b ORDER BY b.id", Booking.class)
+                .getResultList();
     }
+
+//    @SuppressWarnings("unchecked")
+//    @Override
+//    public List<Booking> getAllBookings() {
+//        return entityManager.createQuery("SELECT b FROM Booking b ORDER BY b.id", Booking.class).getResultList();
+//    }
 }

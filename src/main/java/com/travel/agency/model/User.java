@@ -6,7 +6,7 @@ import lombok.ToString;
 
 import javax.persistence.*;
 import javax.validation.constraints.Pattern;
-import java.util.List;
+
 
 @Entity
 @Table(name = "users")

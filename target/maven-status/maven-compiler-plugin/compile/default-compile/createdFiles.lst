@@ -2,6 +2,7 @@ com\travel\agency\controller\UserController.class
 com\travel\agency\controller\RoomController.class
 com\travel\agency\service\HotelService.class
 com\travel\agency\dao\HotelDao.class
+com\travel\agency\config\AppInitializer.class
 com\travel\agency\service\BookingServiceImpl.class
 com\travel\agency\controller\HomeController.class
 com\travel\agency\dao\RoomDao.class
@@ -18,9 +19,11 @@ com\travel\agency\service\RoomServiceImpl.class
 com\travel\agency\model\Hotel.class
 com\travel\agency\dao\HotelDaoImpl.class
 com\travel\agency\service\UserServiceImpl.class
+com\travel\agency\config\HibernateConfig.class
 com\travel\agency\dao\BookingDao.class
 com\travel\agency\model\Role.class
 com\travel\agency\model\User.class
+com\travel\agency\config\WebMvcConfig.class
 com\travel\agency\dao\UserDao.class
 com\travel\agency\dao\UserDaoImpl.class
 com\travel\agency\model\Country.class

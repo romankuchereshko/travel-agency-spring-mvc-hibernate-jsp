@@ -4,8 +4,7 @@ import com.travel.agency.dao.RoomDao;
 import com.travel.agency.model.Room;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import javax.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class RoomServiceImpl implements RoomService {
@@ -17,6 +16,7 @@ public class RoomServiceImpl implements RoomService {
     }
 
     @Override
+    @Transactional
     public void add(Room room) {
         roomDao.add(room);
     }

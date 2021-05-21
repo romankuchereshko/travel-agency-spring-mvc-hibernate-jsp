@@ -5,8 +5,8 @@ import com.travel.agency.model.Booking;
 import com.travel.agency.model.Hotel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.transaction.Transactional;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +22,7 @@ public class BookingServiceImpl implements BookingService {
     }
 
     @Override
+    @Transactional
     public boolean book(Booking booking) {
         List<Booking> bookings = bookingDao.getAllBookings();
         Date guestArriving = booking.getArrival();
@@ -40,16 +41,19 @@ public class BookingServiceImpl implements BookingService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Booking getBookingById(Long id) {
         return bookingDao.read(id);
     }
 
     @Override
+    @Transactional
     public void cancelBooking(Long id) {
         bookingDao.delete(id);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public boolean checkAvailableRoomsInHotelByDate(Hotel hotel, Date date) {
         return bookingDao.getAllBookings().stream()
                 .filter(booking -> booking.getHotel().getName().equals(hotel.getName()))
@@ -58,6 +62,7 @@ public class BookingServiceImpl implements BookingService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<Booking> getAllBookingsByUserId(Long id) {
         List<Booking> bookingList = bookingDao.getAllBookings();
         return bookingList.stream()
@@ -66,6 +71,7 @@ public class BookingServiceImpl implements BookingService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<Booking> getAllBookings() {
         List<Booking> bookingList = bookingDao.getAllBookings();
         if (bookingList.isEmpty()) {

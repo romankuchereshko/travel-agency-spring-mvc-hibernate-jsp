@@ -6,7 +6,6 @@ import com.travel.agency.service.HotelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -27,13 +26,13 @@ public class HotelController {
     }
 
     @GetMapping("/add")
-    public String addHotelGet(ModelMap model) {
+    public String addHotelForm(Model model) {
         model.addAttribute("hotel", new Hotel());
         return "add-hotel";
     }
 
     @PostMapping("/add")
-    public String addHotel(Hotel hotel, ModelMap model) {
+    public String addHotel(Hotel hotel) {
         hotelService.add(hotel);
         return "redirect:/home";
     }

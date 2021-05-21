@@ -1,6 +1,7 @@
 C:\Users\Roma\IdeaProjects\agencyTEST\src\main\java\com\travel\agency\model\Booking.java
 C:\Users\Roma\IdeaProjects\agencyTEST\src\main\java\com\travel\agency\service\HotelService.java
 C:\Users\Roma\IdeaProjects\agencyTEST\src\main\java\com\travel\agency\model\Role.java
+C:\Users\Roma\IdeaProjects\agencyTEST\src\main\java\com\travel\agency\config\WebMvcConfig.java
 C:\Users\Roma\IdeaProjects\agencyTEST\src\main\java\com\travel\agency\dao\UserDaoImpl.java
 C:\Users\Roma\IdeaProjects\agencyTEST\src\main\java\com\travel\agency\model\Hotel.java
 C:\Users\Roma\IdeaProjects\agencyTEST\src\main\java\com\travel\agency\service\BookingService.java
@@ -17,10 +18,12 @@ C:\Users\Roma\IdeaProjects\agencyTEST\src\main\java\com\travel\agency\dao\RoomDa
 C:\Users\Roma\IdeaProjects\agencyTEST\src\main\java\com\travel\agency\model\Room.java
 C:\Users\Roma\IdeaProjects\agencyTEST\src\main\java\com\travel\agency\dao\UserDao.java
 C:\Users\Roma\IdeaProjects\agencyTEST\src\main\java\com\travel\agency\service\BookingServiceImpl.java
+C:\Users\Roma\IdeaProjects\agencyTEST\src\main\java\com\travel\agency\config\AppInitializer.java
 C:\Users\Roma\IdeaProjects\agencyTEST\src\main\java\com\travel\agency\service\RoomService.java
 C:\Users\Roma\IdeaProjects\agencyTEST\src\main\java\com\travel\agency\dao\HotelDao.java
 C:\Users\Roma\IdeaProjects\agencyTEST\src\main\java\com\travel\agency\model\Country.java
 C:\Users\Roma\IdeaProjects\agencyTEST\src\main\java\com\travel\agency\service\HotelServiceImpl.java
+C:\Users\Roma\IdeaProjects\agencyTEST\src\main\java\com\travel\agency\config\HibernateConfig.java
 C:\Users\Roma\IdeaProjects\agencyTEST\src\main\java\com\travel\agency\dao\RoomDao.java
 C:\Users\Roma\IdeaProjects\agencyTEST\src\main\java\com\travel\agency\model\User.java
 C:\Users\Roma\IdeaProjects\agencyTEST\src\main\java\com\travel\agency\dao\BookingDaoImpl.java

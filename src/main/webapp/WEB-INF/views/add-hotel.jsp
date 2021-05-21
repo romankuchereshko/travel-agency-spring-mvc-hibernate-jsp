@@ -18,11 +18,11 @@
     <form:input path="name" type="text" required="required"/>
     <form:errors path="name" cssClass="text-warning"/>
 
-<%--    <form:select path="country">--%>
-<%--        <form:option value="Ukraine" label="Ukraine"/>--%>
-<%--        <form:option value="Germany" label="Germany"/>--%>
-<%--        <form:option value="Poland" label="Poland"/>--%>
-<%--    </form:select>--%>
+    <form:select path="country">
+        <form:option value="Ukraine" label="Ukraine"/>
+        <form:option value="Germany" label="Germany"/>
+        <form:option value="Poland" label="Poland"/>
+    </form:select>
 
     <input type="submit" value="Submit"/>
 </form:form>

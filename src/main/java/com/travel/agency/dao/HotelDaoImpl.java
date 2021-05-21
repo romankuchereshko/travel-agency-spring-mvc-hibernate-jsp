@@ -1,15 +1,10 @@
 package com.travel.agency.dao;
 
 import com.travel.agency.model.Hotel;
-import com.travel.agency.model.User;
 import lombok.extern.slf4j.Slf4j;
-import org.hibernate.Session;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.transaction.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -17,19 +12,23 @@ import java.util.stream.Collectors;
 @Slf4j
 public class HotelDaoImpl implements HotelDao {
 
-    @PersistenceContext
-    private EntityManager entityManager;
+    private SessionFactory sessionFactory;
+
+    public HotelDaoImpl(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
+    }
 
     @Override
     public void add(Hotel hotel) {
-        entityManager.unwrap(Session.class).save(hotel);
+        sessionFactory.getCurrentSession().save(hotel);
         log.info("Hotel successfully added!");
     }
 
-    @SuppressWarnings("unchecked")
     @Override
     public List<Hotel> getAllHotels() {
-        List<Hotel> hotels = entityManager.createQuery("SELECT h FROM Hotel h ORDER BY h.id", Hotel.class).getResultList();
+        List<Hotel> hotels = sessionFactory.getCurrentSession()
+                .createQuery("SELECT h FROM Hotel h ORDER BY h.id", Hotel.class)
+                .getResultList();
         for (Hotel hotel : hotels) {
             log.info("Hotel List::" + hotel);
         }
@@ -39,7 +38,9 @@ public class HotelDaoImpl implements HotelDao {
     @SuppressWarnings("unchecked")
     @Override
     public List<Hotel> getHotelsInCurrentCountry(String country) {
-        List<Hotel> allHotels = entityManager.createQuery("from User").getResultList();
+        List<Hotel> allHotels = sessionFactory.getCurrentSession()
+                .createQuery("from User")
+                .getResultList();
         return allHotels.stream()
                 .filter(hotel -> hotel.getCountry().name().equals(country))
                 .peek(hotel -> log.info("Hotel List::" + hotel))

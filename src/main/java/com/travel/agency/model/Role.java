@@ -3,10 +3,9 @@ package com.travel.agency.model;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
-import java.util.List;
 
 @Entity
 @Table(name = "roles")
@@ -19,7 +18,7 @@ public class Role {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(message = "The 'name' cannot be empty")
+    @NotEmpty(message = "The 'name' cannot be empty")
     @Column(name = "name", nullable = false, unique = true)
     private String name;
 
