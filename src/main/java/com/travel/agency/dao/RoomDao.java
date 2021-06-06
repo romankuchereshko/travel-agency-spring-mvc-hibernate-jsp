@@ -1,7 +1,16 @@
 package com.travel.agency.dao;
 
+import com.travel.agency.dto.RoomDto;
 import com.travel.agency.model.Room;
 
+import java.util.List;
+
 public interface RoomDao {
-    void add(Room room);
+    RoomDto add(Room room);
+
+    void delete(Long id);
+
+    Room findById(Long id);
+
+    List<Room> getAllRoomsByHotelId(Long id);
 }

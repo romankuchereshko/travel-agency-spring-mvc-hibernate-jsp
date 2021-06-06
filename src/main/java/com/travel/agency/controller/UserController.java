@@ -22,28 +22,10 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping("/create")
-    public String create() {
-        return "create-user";
-    }
-
-    @PostMapping("/create")
-    public String create(User user) {
-        userService.createOrUpdate(user);
-        return "redirect:/home";
-    }
-
-    @GetMapping("/{id}")
-    public String read(@PathVariable Long id, Model model) {
-        model.addAttribute("users", Collections.singletonList(userService.read(id)));
-        return "redirect:/management/{id}";
-    }
-
-    @GetMapping("/{id}/delete")
-    public String delete(@PathVariable("id") Long id) {
-        userService.delete(id);
-        return "redirect:/home";
-    }
+//    @GetMapping("/{id}/bookings")
+//    public String getUsersBookings(@PathVariable Long id, ) {
+//
+//    }
 
     @GetMapping("/all")
     public String getAll(Model model) {

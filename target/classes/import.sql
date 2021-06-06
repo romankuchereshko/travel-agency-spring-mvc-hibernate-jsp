@@ -1,21 +1,31 @@
-INSERT INTO roles (id, name) VALUES (1, 'USER');
-INSERT INTO roles (id, name) VALUES (2, 'ADMIN');
+insert into roles (name) values ('ADMIN');
+insert into roles (name) values ('USER');
 
-INSERT INTO hotels (id, hotel_name, country) VALUES (1, 'Grand Hotel Tremezzo', 'GERMANY');
-INSERT INTO hotels (id, hotel_name, country) VALUES (2, 'Mandarin Oriental', 'POLAND');
-INSERT INTO hotels (id, hotel_name, country) VALUES (3, 'InterContinental', 'UKRAINE');
+insert into countries (name) values ('GERMANY');
+insert into countries (name) values ('POLAND');
+insert into countries (name) values ('UKRAINE');
 
-INSERT INTO users (id, name, email, password, role_id) VALUES (5, 'Nick', 'nick@mail.com', '$2a$10$CJgEoobU2gm0euD4ygru4ukBf9g8fYnPrMvYk.q0GMfOcIDtUhEwC', 1);
-INSERT INTO users (id, name, email, password, role_id) VALUES (6, 'Nora', 'nora@mail.com', '$2a$10$yYQaJrHzjOgD5wWCyelp0e1Yv1KEKeqUlYfLZQ1OQvyUrnEcX/rOy', 2);
-INSERT INTO users (id, name, email, password, role_id) VALUES (4, 'Mike', 'mike@mail.com', '$2a$10$CdEJ2PKXgUCIwU4pDQWICuiPjxb1lysoX7jrN.Y4MTMoY9pjfPALO', 1);
+insert into hotels (hotel_name, type, rate, wifi, pool, pets, smoking, country_id) values ('Grand Hotel Tremezzo', 'HOTEL', 5, true, true, true, false, 1);
+insert into hotels (hotel_name, type, rate, wifi, pool, pets, smoking, country_id) values ('Mandarin Oriental', 'HOTEL', 5, true, false, true, false, 2);
+insert into hotels (hotel_name, type, rate, wifi, pool, pets, smoking, country_id) values ('InterContinental', 'HOTEL', 4, true, false, true, true, 3);
 
-INSERT INTO rooms (id, is_available, guest_id) VALUES (1, false, 4);
-INSERT INTO rooms (id, is_available, guest_id) VALUES (2, false, 5);
-INSERT INTO rooms (id, is_available, guest_id) VALUES (3, false, 6);
-INSERT INTO rooms (id, is_available, guest_id) VALUES (4, true, null);
-INSERT INTO rooms (id, is_available, guest_id) VALUES (5, true, null);
-INSERT INTO rooms (id, is_available, guest_id) VALUES (6, true, null);
+insert into users (name, email, password, role_id) values ('admin', 'admin@gmail.com', '$2y$12$6wWu.bjCJegev7tg3l0R9.ZUxKbMyIA2HsMkOwmrT4CnQ75ldJhN6', 1);
+insert into users (name, email, password, role_id) values ('Nora', 'nora@gmail.com', '$2y$12$2bu5olbBfNziKL2DEg6Dj.WvdKD35uUjaD4CmJvplsBT.C3N6VtCy', 2);
+insert into users (name, email, password, role_id) values ('Mike', 'mike@gmail.com', '$2y$12$2bu5olbBfNziKL2DEg6Dj.WvdKD35uUjaD4CmJvplsBT.C3N6VtCy', 2);
 
-INSERT INTO bookings (id, arrival, checkout, room_id, user_id, hotel_id) VALUES (123, '2021-05-11', '2021-05-13', 1, 4, 1);
-INSERT INTO bookings (id, arrival, checkout, room_id, user_id, hotel_id) VALUES (456, '2021-05-07', '2021-05-08', 2, 5, 3);
-INSERT INTO bookings (id, arrival, checkout, room_id, user_id, hotel_id) VALUES (789, '2021-05-13', '2021-05-17', 3, 6, 1);
+insert into rooms (room_price, guests_count, bed_preference, hotel_id) values (100, 3, 'LARGE_DOUBLE', 1);
+insert into rooms (room_price, guests_count, bed_preference, hotel_id) values (80, 2, 'TWIN', 1);
+insert into rooms (room_price, guests_count, bed_preference, hotel_id) values (75, 2, 'DOUBLE', 1);
+insert into rooms (room_price, guests_count, bed_preference, hotel_id) values (70, 1, 'SINGLE', 1);
+insert into rooms (room_price, guests_count, bed_preference, hotel_id) values (90, 3, 'LARGE_DOUBLE', 2);
+insert into rooms (room_price, guests_count, bed_preference, hotel_id) values (80, 2, 'TWIN', 2);
+insert into rooms (room_price, guests_count, bed_preference, hotel_id) values (85, 2, 'DOUBLE', 2);
+insert into rooms (room_price, guests_count, bed_preference, hotel_id) values (70, 1, 'SINGLE', 2);
+insert into rooms (room_price, guests_count, bed_preference, hotel_id) values (75, 2, 'DOUBLE', 3);
+insert into rooms (room_price, guests_count, bed_preference, hotel_id) values (70, 2, 'TWIN', 3);
+insert into rooms (room_price, guests_count, bed_preference, hotel_id) values (60, 1, 'SINGLE', 3);
+insert into rooms (room_price, guests_count, bed_preference, hotel_id) values (60, 1, 'SINGLE', 3);
+
+insert into bookings (checkin, checkout, status, room_id, user_id) values ('2021-06-11', '2021-06-13', 'ACTIVE', 4, 1);
+insert into bookings (checkin, checkout, status, room_id, user_id) values ('2021-06-07', '2021-06-08', 'ACTIVE', 7, 2);
+insert into bookings (checkin, checkout, status, room_id, user_id) values ('2021-06-07', '2021-06-08', 'ACTIVE', 5, 3);

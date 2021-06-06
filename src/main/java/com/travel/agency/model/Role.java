@@ -2,10 +2,12 @@ package com.travel.agency.model;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.NonNull;
 import lombok.ToString;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "roles")
@@ -15,13 +17,15 @@ import javax.persistence.*;
 public class Role {
 
     @Id
+    @NonNull
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotEmpty(message = "The 'name' cannot be empty")
+    @NonNull
     @Column(name = "name", nullable = false, unique = true)
     private String name;
 
-//    @OneToMany(mappedBy = "role")
-//    private List<User> users;
+    @OneToMany(mappedBy = "role")
+    @ToString.Exclude
+    private List<User> users;
 }

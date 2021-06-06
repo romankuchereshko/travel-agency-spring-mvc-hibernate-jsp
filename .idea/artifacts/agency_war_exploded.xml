@@ -54,6 +54,7 @@
           <element id="library" level="project" name="Maven: org.checkerframework:checker-qual:3.5.0" />
           <element id="library" level="project" name="Maven: org.slf4j:slf4j-simple:1.7.30" />
           <element id="library" level="project" name="Maven: org.slf4j:slf4j-api:1.7.30" />
+          <element id="library" level="project" name="Maven: org.modelmapper:modelmapper:2.3.9" />
         </element>
       </element>
       <element id="directory" name="META-INF">

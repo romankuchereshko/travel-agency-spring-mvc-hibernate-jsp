@@ -1,5 +1,7 @@
 package com.travel.agency.model;
 
+import com.travel.agency.dao.marker.Convertible;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
@@ -12,23 +14,27 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @ToString
-public class Room {
+public class Room implements Convertible {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @Column
     private Long id;
 
-    @Column(name = "is_available", columnDefinition = "boolean default true")
-    private Boolean isAvailable;
+    @Column(name = "room_price")
+    private Long price;
 
-//    @OneToMany(mappedBy = "room", cascade = CascadeType.REMOVE)
-//    private List<Booking> booking;
+    @Column(name = "guests_count")
+    private Integer guestsCount;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "guest_id")
-    private User guest;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "bed_preference")
+    private BedPreference bed;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "hotel_id")
     private Hotel hotel;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "room", fetch = FetchType.EAGER)
+    private List<Booking> bookings;
 }

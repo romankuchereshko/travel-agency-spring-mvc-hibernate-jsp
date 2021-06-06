@@ -11,10 +11,16 @@
 <table>
     <c:forEach var="booking" items="${all}">
         <tr>
-            <td><c:out value="Hotel: ${booking.hotel.name}"/></td>
-            <td><c:out value="Room number: ${booking.room.id}"/></td>
-            <td><c:out value="Arrival: ${booking.arrival.toString()}"/></td>
-            <td><c:out value="Checkout: ${booking.checkout.toString()}"/></td>
+            <th>Room</th>
+            <th>Hotel</th>
+            <th>Checkin</th>
+            <th>Checkout</th>
+        </tr>
+        <tr>
+            <td><c:out value="${booking.room.id}"/></td>
+            <td><c:out value="${booking.room.hotel.name}"/></td>
+            <td><c:out value="${booking.checkIn}"/></td>
+            <td><c:out value="${booking.checkOut}"/></td>
         </tr>
     </c:forEach>
     <c:if test="${empty all}">

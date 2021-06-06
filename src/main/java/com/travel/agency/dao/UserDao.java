@@ -1,12 +1,18 @@
 package com.travel.agency.dao;
 
+import com.travel.agency.model.Booking;
 import com.travel.agency.model.User;
 
 import java.util.List;
 
 public interface UserDao {
-    void create(User user);
-    User read(Long id);
-    void delete(Long id);
+    User getByEmail(String email);
+
+    User getById(Long id);
+
+    User getByName(String name);
+
     List<User> getAllUsers();
+
+    List<Booking> getUserBookingsById(Long id);
 }

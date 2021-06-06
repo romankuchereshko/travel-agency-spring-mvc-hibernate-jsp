@@ -1,31 +1,32 @@
 package com.travel.agency.model;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import com.travel.agency.dao.marker.Convertible;
+import lombok.*;
 
 import javax.persistence.*;
-import java.sql.Date;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "bookings")
 @Data
 @NoArgsConstructor
 @ToString
-public class Booking {
+public class Booking implements Convertible {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @Column
     private Long id;
 
-    @Column(name = "arrival")
-    private Date arrival;
+    @Column(name = "checkin")
+    private LocalDate checkIn;
 
     @Column(name = "checkout")
-    private Date checkout;
+    private LocalDate checkOut;
 
-//    @Column(name = "is_cancelled")
-//    private Boolean isCancelled;
+    @Column (name = "status")
+    @Enumerated(value = EnumType.STRING)
+    private Status status;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "room_id")
@@ -35,7 +36,7 @@ public class Booking {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "hotel_id")
-    private Hotel hotel;
+//    @ManyToOne(fetch = FetchType.EAGER)
+//    @JoinColumn(name = "hotel_id")
+//    private Hotel hotel;
 }

@@ -1,40 +1,59 @@
 package com.travel.agency.controller;
 
+import com.travel.agency.converter.DtoConverter;
+import com.travel.agency.dto.HotelDto;
+import com.travel.agency.model.AccommodationType;
 import com.travel.agency.model.Hotel;
 import com.travel.agency.service.BookingService;
+import com.travel.agency.service.CountryService;
 import com.travel.agency.service.HotelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 
 import java.sql.Date;
+import java.util.List;
 
 @Controller
 @RequestMapping("/hotels")
 public class HotelController {
     private final HotelService hotelService;
     private final BookingService bookingService;
+    private final CountryService countryService;
+    private final DtoConverter dtoConverter;
 
     @Autowired
-    public HotelController(HotelService hotelService, BookingService bookingService) {
+    public HotelController(HotelService hotelService, BookingService bookingService, CountryService countryService, DtoConverter dtoConverter) {
         this.hotelService = hotelService;
         this.bookingService = bookingService;
+        this.countryService = countryService;
+        this.dtoConverter = dtoConverter;
     }
 
     @GetMapping("/add")
     public String addHotelForm(Model model) {
-        model.addAttribute("hotel", new Hotel());
+        model.addAttribute("hotel", new HotelDto());
+        model.addAttribute("countries", countryService.getAllCountries());
+        model.addAttribute("type", AccommodationType.values());
         return "add-hotel";
     }
 
     @PostMapping("/add")
-    public String addHotel(Hotel hotel) {
+    public String addHotel(@ModelAttribute HotelDto hotelDto, BindingResult result) {
+        if (result.hasErrors()) {
+            return "add-hotel";
+        }
+        Hotel hotel = dtoConverter.convertToEntity(hotelDto, new Hotel());
         hotelService.add(hotel);
-        return "redirect:/home";
+        return "add-room";
+    }
+
+    @GetMapping("/delete/{id}")
+    public String deleteHotel(@PathVariable Long id) {
+        hotelService.delete(id);
+        return "hotels";
     }
 
     @GetMapping("/all")
@@ -43,23 +62,15 @@ public class HotelController {
         return "hotels";
     }
 
-    @GetMapping("/all/{country}")
-    public String getAllHotelsInCountry(@PathVariable String country, Model model) {
-        if (country.isEmpty()) {
-            model.addAttribute("hotels", hotelService.getAllHotels());
-        } else {
-            model.addAttribute("hotels", hotelService.getHotelsInCurrentCountry(country));
-            model.addAttribute("country", country);
+    @GetMapping("/allHotelsInCountry/{id}")
+    public String getHotelsInCountry(@PathVariable("id") Long countryId, Model model) {
+        List<Hotel> hotels = hotelService.findByCountryId(countryId);
+        if (hotels.isEmpty()) {
+            model.addAttribute("errorMessage", "There is no hotels in this country");
+            model.addAttribute("countries", countryService.getAllCountries());
+            return "hotels";
         }
-        return "hotels";
-    }
-
-    @GetMapping("/check")
-    public String checkIfAvailable(Hotel hotel, Date date) {
-        if (bookingService.checkAvailableRoomsInHotelByDate(hotel, date)) {
-            return "redirect:/booking/book";
-        } else {
-            return "redirect:/home";
-        }
+        model.addAttribute("hotels", hotels);
+        return "hotels-in-country";
     }
 }
