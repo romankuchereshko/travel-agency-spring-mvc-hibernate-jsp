@@ -19,7 +19,7 @@ public class CountryServiceImpl implements CountryService {
     }
 
     @Override
-    public Country findById(Integer id) {
+    public Country findById(Long id) {
         return countryDao.findById(id);
     }
 

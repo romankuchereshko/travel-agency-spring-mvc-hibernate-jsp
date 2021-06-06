@@ -20,14 +20,12 @@ import java.util.List;
 @RequestMapping("/hotels")
 public class HotelController {
     private final HotelService hotelService;
-    private final BookingService bookingService;
     private final CountryService countryService;
     private final DtoConverter dtoConverter;
 
     @Autowired
-    public HotelController(HotelService hotelService, BookingService bookingService, CountryService countryService, DtoConverter dtoConverter) {
+    public HotelController(HotelService hotelService, CountryService countryService, DtoConverter dtoConverter) {
         this.hotelService = hotelService;
-        this.bookingService = bookingService;
         this.countryService = countryService;
         this.dtoConverter = dtoConverter;
     }
@@ -36,16 +34,18 @@ public class HotelController {
     public String addHotelForm(Model model) {
         model.addAttribute("hotel", new HotelDto());
         model.addAttribute("countries", countryService.getAllCountries());
-        model.addAttribute("type", AccommodationType.values());
+        model.addAttribute("types", AccommodationType.values());
         return "add-hotel";
     }
 
     @PostMapping("/add")
-    public String addHotel(@ModelAttribute HotelDto hotelDto, BindingResult result) {
-        if (result.hasErrors()) {
-            return "add-hotel";
-        }
+    public String addHotel(@ModelAttribute HotelDto hotelDto, @RequestParam("countryId") Long countryId/*, BindingResult result*/) {
+//        if (result.hasErrors()) {
+//            return "add-hotel";
+//        }
+        hotelDto.setCountry(countryService.findById(countryId));
         Hotel hotel = dtoConverter.convertToEntity(hotelDto, new Hotel());
+
         hotelService.add(hotel);
         return "add-room";
     }

@@ -23,7 +23,6 @@ public class HotelDaoImpl implements HotelDao {
     @Override
     public HotelDto add(Hotel hotel) {
         Serializable serializable = sessionFactory.getCurrentSession().save(hotel);
-        log.info("Hotel successfully added!");
         if (serializable == null) {
             log.info("Hotel with id {} wasn't created! ", hotel.getId());
             return null;

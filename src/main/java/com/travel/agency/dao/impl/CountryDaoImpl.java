@@ -7,11 +7,9 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
 
-import javax.transaction.Transactional;
 import java.util.List;
 
 @Repository
-@Transactional
 public class CountryDaoImpl implements CountryDao {
     private final SessionFactory sessionFactory;
 
@@ -20,7 +18,7 @@ public class CountryDaoImpl implements CountryDao {
     }
 
     @Override
-    public Country findById(Integer id) {
+    public Country findById(Long id) {
         Session session = sessionFactory.getCurrentSession();
         return session.get(Country.class, id);
     }

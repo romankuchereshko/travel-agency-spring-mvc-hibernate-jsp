@@ -6,7 +6,7 @@ import com.travel.agency.model.Hotel;
 import java.util.List;
 
 public interface CountryDao {
-    Country findById(Integer id);
+    Country findById(Long id);
 
     Country findByName(String name);
 

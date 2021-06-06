@@ -8,7 +8,7 @@ import java.util.List;
 
 @Repository
 public interface CountryService {
-    Country findById(Integer id);
+    Country findById(Long id);
 
     Country findByName(String name);
 

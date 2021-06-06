@@ -50,7 +50,7 @@ public class Hotel implements Convertible {
     @JoinColumn(name = "country_id")
     private Country country;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "hotel", fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "hotel", fetch = FetchType.EAGER)
     private List<Room> rooms;
 
 //    @OneToMany(mappedBy = "hotel", cascade = CascadeType.REMOVE)
