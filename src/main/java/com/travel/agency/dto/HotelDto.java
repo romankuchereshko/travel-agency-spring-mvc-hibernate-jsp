@@ -10,7 +10,7 @@ import lombok.*;
 @Getter
 @Data
 public class HotelDto implements Convertible {
-    private Long id;
+//    private Long id;
 
     private String name;
 

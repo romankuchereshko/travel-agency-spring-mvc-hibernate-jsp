@@ -29,7 +29,6 @@ public class HotelDaoImpl implements HotelDao {
         }
         log.info("Hotel with id {} was created successfully! ", hotel.getId());
         return new HotelDto(
-                hotel.getId(),
                 hotel.getName(),
                 hotel.getType(),
                 hotel.getHasWiFi(),
@@ -44,6 +43,7 @@ public class HotelDaoImpl implements HotelDao {
     public void delete(Long id) {
         Hotel hotel = sessionFactory.getCurrentSession().load(Hotel.class, id);
         if (hotel != null) {
+            hotel.setRooms(null);
             sessionFactory.getCurrentSession().delete(hotel);
             log.info("Hotel successfully deleted!");
         } else {

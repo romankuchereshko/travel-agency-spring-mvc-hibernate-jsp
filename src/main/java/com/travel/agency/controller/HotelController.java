@@ -7,6 +7,8 @@ import com.travel.agency.model.Hotel;
 import com.travel.agency.service.BookingService;
 import com.travel.agency.service.CountryService;
 import com.travel.agency.service.HotelService;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -45,15 +47,14 @@ public class HotelController {
 //        }
         hotelDto.setCountry(countryService.findById(countryId));
         Hotel hotel = dtoConverter.convertToEntity(hotelDto, new Hotel());
-
         hotelService.add(hotel);
-        return "add-room";
+        return "redirect:/hotels/all";
     }
 
     @GetMapping("/delete/{id}")
     public String deleteHotel(@PathVariable Long id) {
         hotelService.delete(id);
-        return "hotels";
+        return "redirect:/hotels/all";
     }
 
     @GetMapping("/all")

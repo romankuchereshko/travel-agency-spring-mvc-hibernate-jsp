@@ -37,6 +37,7 @@ public class RoomDaoImpl implements RoomDao {
     public void delete(Long id) {
         Room room = sessionFactory.getCurrentSession().load(Room.class, id);
         if (room != null) {
+            room.setBookings(null);
             sessionFactory.getCurrentSession().delete(room);
             log.info("Room successfully deleted!");
         } else {

@@ -4,6 +4,8 @@ import com.travel.agency.dao.marker.Convertible;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import javax.validation.constraints.Max;
@@ -50,7 +52,9 @@ public class Hotel implements Convertible {
     @JoinColumn(name = "country_id")
     private Country country;
 
-    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "hotel", fetch = FetchType.EAGER)
+    @ToString.Exclude
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "hotel", fetch = FetchType.EAGER)
     private List<Room> rooms;
 
 //    @OneToMany(mappedBy = "hotel", cascade = CascadeType.REMOVE)
