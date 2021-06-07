@@ -5,9 +5,7 @@
     <title>Booking list</title>
 </head>
 <body>
-<%@include file="header.html" %>
 <h1>Management</h1>
-
 <table>
     <c:forEach var="booking" items="${all}">
         <tr>
@@ -27,6 +25,6 @@
         no bookings added yet.
     </c:if>
 </table>
-
+<a href="/home">Back home</a>
 </body>
 </html>

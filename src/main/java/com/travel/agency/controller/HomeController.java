@@ -29,10 +29,4 @@ public class HomeController {
         model.addAttribute("users", userService.getAllUsers());
         return "management";
     }
-
-//    @GetMapping("management/{id}")
-//    public String management(@PathVariable Long id, Model model) {
-//        model.addAttribute("users", Collections.singletonList(userService.read(id)));
-//        return "management";
-//    }
 }

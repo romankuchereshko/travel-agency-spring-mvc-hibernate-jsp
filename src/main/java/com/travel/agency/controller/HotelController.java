@@ -41,10 +41,7 @@ public class HotelController {
     }
 
     @PostMapping("/add")
-    public String addHotel(@ModelAttribute HotelDto hotelDto, @RequestParam("countryId") Long countryId/*, BindingResult result*/) {
-//        if (result.hasErrors()) {
-//            return "add-hotel";
-//        }
+    public String addHotel(@ModelAttribute HotelDto hotelDto, @RequestParam("countryId") Long countryId) {
         hotelDto.setCountry(countryService.findById(countryId));
         Hotel hotel = dtoConverter.convertToEntity(hotelDto, new Hotel());
         hotelService.add(hotel);

@@ -39,7 +39,7 @@
 <%--                    <td><a href="/rooms/add/${hotel.id}">Add room</a></td>--%>
 <%--                    <td><a href="/rooms/all_rooms_in_hotel/${hotel.id}/">All rooms in hotel</a></td>--%>
                     <td>
-                        <form action="/rooms/all_rooms_in_hotel/${hotel.id}" method="post">
+                        <form action="/rooms/all_rooms_in_hotel/${hotel.id}" method="get">
                             <input type="submit" value="check available room">
                         </form>
                     </td>

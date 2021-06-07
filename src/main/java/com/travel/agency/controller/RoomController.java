@@ -69,7 +69,6 @@ public class RoomController {
         }
 
         if (isAvailable) {
-//            model.addAttribute("errorMessage", "");
             model.addAttribute("id", roomId);
             model.addAttribute("checkIn", checkIn);
             model.addAttribute("checkOut", checkOut);

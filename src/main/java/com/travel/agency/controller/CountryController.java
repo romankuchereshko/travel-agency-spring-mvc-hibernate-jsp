@@ -28,7 +28,7 @@ public class CountryController {
     }
 
     @PostMapping("/getAllHotelsInCountry")
-    public String getAllHotelsInCountry(@RequestParam("name") String country) {
+    public String getAllHotelsInCountry(@RequestParam("country") String country) {
         Long countryId = countryService.findByName(country).getId();
         return "redirect:/hotels/allHotelsInCountry/" + countryId;
     }

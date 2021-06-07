@@ -23,7 +23,6 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/booking")
-//@Transactional
 public class BookingController {
     private final BookingService bookingService;
     private final UserService userService;
@@ -54,36 +53,6 @@ public class BookingController {
         return "success";
     }
 
-//    @PostMapping("/available-room/{id}")
-//    public String checkIfRoomAvailableInHotel(@PathVariable(name = "id") Long roomId,
-//                                              @RequestParam(value = "checkIn") String checkIn,
-//                                              @RequestParam(value = "checkOut") String checkOut,
-//                                              @RequestParam(value = "hotelId") Long hotelId,
-//                                              Model model) {
-//        Room room = roomService.findById(roomId);
-//        boolean isAvailable;
-//        try {
-//            isAvailable = roomService.checkIfRoomAvailableInHotel(
-//                    new BookingDto(room, LocalDate.parse(checkIn), LocalDate.parse(checkOut), Status.NOT_ACTIVE));
-//        } catch (IllegalArgumentException e) {
-//            model.addAttribute("errorMessage", e.getMessage());
-//            model.addAttribute("rooms", roomService.getAllRoomsByHotelId(hotelId));
-//            return "check-room";
-//        }
-//
-//        if (isAvailable) {
-////            model.addAttribute("errorMessage", "");
-//            model.addAttribute("id", roomId);
-//            model.addAttribute("checkIn", checkIn);
-//            model.addAttribute("checkOut", checkOut);
-//            return "book-room";
-//        } else {
-//            model.addAttribute("errorMessage", "This room is not available!");
-//            model.addAttribute("rooms", roomService.getAllRoomsByHotelId(hotelId));
-//            return "check-room";
-//        }
-//    }
-
     @GetMapping("/delete/{id}")
     public String cancelBooking(@PathVariable("id") Long bookingId) {
             bookingService.cancel(bookingId);
@@ -97,16 +66,4 @@ public class BookingController {
             model.addAttribute("user", userService.getById(userId));
         return "bookings-list";
     }
-
-//    @GetMapping("/all/{id}")
-//    public String getAllBookingsByUserId(@PathVariable("id") Long userId, Model model) {
-//        if (userId != null) {
-//            model.addAttribute("all", bookingService.getBookingsByUserId(userId));
-//            model.addAttribute("user", userService.getById(userId));
-//        } else {
-//            model.addAttribute("all", bookingService.getAllBookings());
-//            model.addAttribute("user", null);
-//        }
-//        return "bookings-list";
-//    }
 }

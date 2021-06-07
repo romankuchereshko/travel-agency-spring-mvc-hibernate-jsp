@@ -6,10 +6,8 @@
     <title>Management</title>
 </head>
 <body>
-<%@include file="header.html" %>
 <h2>Management</h2>
-<h3><a href="<c:url value="/hotels/add"/>">Add new hotel</a></h3>
-<%--<h3><a href="<c:url value="/rooms/add/"/>">Add new room</a></h3>--%>
+<h3><a href="<c:url value="/hotels/all"/>">Hotels</a></h3>
 <table border="1" cellpadding="5">
     <tr>
         <th>Name</th>
@@ -26,14 +24,6 @@
             <th><c:out value="${user.name}"/></th>
             <th><c:out value="${user.email}"/></th>
             <th><c:out value="${user.role.name}"/></th>
-<%--            <c:forEach var="booking" items="${user.bookings}">--%>
-<%--                <tr>--%>
-<%--                    <th><c:out value="${booking.room.id}"/></th>--%>
-<%--                    <th><c:out value="${booking.room.hotel.name}"/></th>--%>
-<%--                    <th><c:out value="${booking.checkIn}"/></th>--%>
-<%--                    <th><c:out value="${booking.checkOut}"/></th>--%>
-<%--                </tr>--%>
-<%--            </c:forEach>--%>
             <th><a href="<c:url value="/booking/all/${user.id}"/>">Bookings</a></th>
         </tr>
     </c:forEach>

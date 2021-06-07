@@ -13,7 +13,7 @@
     <c:if test="${not empty errorMessage}">
         <h4><strong>${errorMessage}</strong></h4>
     </c:if>
-    <table>
+    <table border="1">
         <thead>
         <tr>
             <th>Room number</th>
