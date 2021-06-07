@@ -54,11 +54,14 @@
             <form:options items="${types}"/>
         </form:select>
     </p>
-    <%--    <p>--%>
-    <%--        <label for="hotelRating">Hotel rating</label>--%>
-    <%--        <form:input path="hotelRating" type="number" id="hotelRating" placeholder="Rating" min="0" max="10"--%>
-    <%--                    required="true"/>--%>
-    <%--    </p>--%>
+    <p>
+        <label for="rate">Hotel rate</label>
+        <form:input path="rate" type="number" id="rate" placeholder="Rate" min="1" max="5" required="true"/>
+    </p>
+    <form:checkbox path="hasWiFi" value="true" label="WiFi"/>
+    <form:checkbox path="hasPool" value="true" label="Pool"/>
+    <form:checkbox path="isPetsAllowed" value="true" label="Allow pets"/>
+    <form:checkbox path="canSmoke" value="true" label="Smoking"/>
     <p>
         <input type="submit" value="Add hotel">
     </p>

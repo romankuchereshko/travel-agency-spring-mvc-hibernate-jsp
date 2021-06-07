@@ -16,13 +16,13 @@ public class HotelDto implements Convertible {
 
     private AccommodationType type;
 
-    private Boolean hasWiFi;
+    private Boolean hasWiFi = false;
 
-    private Boolean hasPool;
+    private Boolean hasPool = false;
 
-    private Boolean isPetsAllowed;
+    private Boolean isPetsAllowed = false;
 
-    private Boolean canSmoke;
+    private Boolean canSmoke = false;
 
     private Integer rate;
 
