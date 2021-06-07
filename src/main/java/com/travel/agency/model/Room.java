@@ -33,10 +33,12 @@ public class Room implements Convertible {
     @Column(name = "bed_preference")
     private BedPreference bed;
 
+    @ToString.Exclude
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "hotel_id")
     private Hotel hotel;
 
+    @ToString.Exclude
     @OnDelete(action = OnDeleteAction.CASCADE)
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "room", fetch = FetchType.EAGER)
     private List<Booking> bookings;

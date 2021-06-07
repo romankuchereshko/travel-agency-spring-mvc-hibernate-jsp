@@ -20,13 +20,11 @@ import java.util.List;
 public class RoomServiceImpl implements RoomService {
     private final RoomDao roomDao;
     private final BookingDao bookingDao;
-    private final HotelDao hotelDao;
 
     @Autowired
-    public RoomServiceImpl(RoomDao roomDao, BookingDao bookingDao, HotelDao hotelDao) {
+    public RoomServiceImpl(RoomDao roomDao, BookingDao bookingDao) {
         this.roomDao = roomDao;
         this.bookingDao = bookingDao;
-        this.hotelDao = hotelDao;
     }
 
     @Override
@@ -51,26 +49,17 @@ public class RoomServiceImpl implements RoomService {
 
     @Override
     public boolean checkIfRoomAvailableInHotel(BookingDto bookingDto) {
-//        LocalDate guestArriving = bookingDto.getCheckIn();
-//        LocalDate guestCheckOut = bookingDto.getCheckOut();
-//
-//        List<Booking> allBookings = bookingDao.getAllBookings();
-        List<Room> bookedRoomsOnDate = bookingDao.getRoomsBookedInHotelOnDate(
-                bookingDto.getRoom().getHotel().getId(),
-                bookingDto.getCheckIn(),
-                bookingDto.getCheckOut());
-        return !bookedRoomsOnDate.contains(bookingDto.getRoom());
-
-//        List<Booking> bookings = bookingDto.getRoom().getBookings();
-//
-//        for (Booking b : bookings) {
-//            LocalDate bookedArriving = b.getCheckIn();
-//            LocalDate bookedCheckout = b.getCheckOut();
-//            if (guestCheckOut.isBefore(bookedArriving) || guestArriving.isAfter(bookedCheckout)) {
-//                return false;
-//            }
-//        }
-//        return true;
+//                List<Room> bookedRoomsOnDate = getRoomsBookedInHotelOnDate(
+//                bookingDto.getRoomId(),
+//                bookingDto.getCheckIn(),
+//                bookingDto.getCheckOut());
+        List<Room> bookedRoomsOnDate = roomDao.getRoomsBookedInHotelOnDate(bookingDto.getRoomId(), bookingDto.getCheckIn(), bookingDto.getCheckOut());
+        return !bookedRoomsOnDate.contains(roomDao.findById(bookingDto.getRoomId()));
     }
+
+//    @Override
+//    public List<Room> getRoomsBookedInHotelOnDate(Long hotelId, LocalDate checkIn, LocalDate checkOut) {
+//        return roomDao.getRoomsBookedInHotelOnDate(hotelId, checkIn, checkOut);
+//    }
 
 }

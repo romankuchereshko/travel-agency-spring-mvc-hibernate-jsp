@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,8 +23,8 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/booking")
+//@Transactional
 public class BookingController {
-    @Qualifier("bookingService")
     private final BookingService bookingService;
     private final UserService userService;
     private final RoomService roomService;
@@ -46,40 +47,42 @@ public class BookingController {
                        Principal principal) {
         Room room = roomService.findById(roomId);
         User user = userService.getByName(principal.getName());
-        Booking booking = dtoConverter.convertToEntity(new BookingDto(room, checkin, checkout, Status.ACTIVE), new Booking());
+        Booking booking = dtoConverter.convertToEntity(new BookingDto(roomId, checkin, checkout, Status.ACTIVE), new Booking());
+        booking.setRoom(room);
         booking.setUser(user);
         bookingService.book(booking);
         return "success";
     }
 
-    @GetMapping("/available-room/{id}")
-    public String checkIfRoomAvailableInHotel(@PathVariable(name = "id") Long roomId,
-                                              @RequestParam LocalDate checkIn,
-                                              @RequestParam LocalDate checkOut,
-                                              @RequestParam Long hotelId,
-                                              Model model) {
-        Room room = roomService.findById(roomId);
-        boolean isAvailable;
-        try {
-            isAvailable = roomService.checkIfRoomAvailableInHotel(new BookingDto(room, checkIn, checkOut, Status.NOT_ACTIVE));
-        } catch (IllegalArgumentException e) {
-            model.addAttribute("errorMessage", e.getMessage());
-            model.addAttribute("rooms", roomService.getAllRoomsByHotelId(hotelId));
-            return "check-room";
-        }
-
-        if (isAvailable) {
-//            model.addAttribute("errorMessage", "");
-            model.addAttribute("id", roomId);
-            model.addAttribute("checkIn", checkIn);
-            model.addAttribute("checkOut", checkOut);
-            return "book-room";
-        } else {
-            model.addAttribute("errorMessage", "This room is not available!");
-            model.addAttribute("rooms", roomService.getAllRoomsByHotelId(hotelId));
-            return "check-room";
-        }
-    }
+//    @PostMapping("/available-room/{id}")
+//    public String checkIfRoomAvailableInHotel(@PathVariable(name = "id") Long roomId,
+//                                              @RequestParam(value = "checkIn") String checkIn,
+//                                              @RequestParam(value = "checkOut") String checkOut,
+//                                              @RequestParam(value = "hotelId") Long hotelId,
+//                                              Model model) {
+//        Room room = roomService.findById(roomId);
+//        boolean isAvailable;
+//        try {
+//            isAvailable = roomService.checkIfRoomAvailableInHotel(
+//                    new BookingDto(room, LocalDate.parse(checkIn), LocalDate.parse(checkOut), Status.NOT_ACTIVE));
+//        } catch (IllegalArgumentException e) {
+//            model.addAttribute("errorMessage", e.getMessage());
+//            model.addAttribute("rooms", roomService.getAllRoomsByHotelId(hotelId));
+//            return "check-room";
+//        }
+//
+//        if (isAvailable) {
+////            model.addAttribute("errorMessage", "");
+//            model.addAttribute("id", roomId);
+//            model.addAttribute("checkIn", checkIn);
+//            model.addAttribute("checkOut", checkOut);
+//            return "book-room";
+//        } else {
+//            model.addAttribute("errorMessage", "This room is not available!");
+//            model.addAttribute("rooms", roomService.getAllRoomsByHotelId(hotelId));
+//            return "check-room";
+//        }
+//    }
 
     @GetMapping("/delete/{id}")
     public String cancelBooking(@PathVariable("id") Long bookingId) {

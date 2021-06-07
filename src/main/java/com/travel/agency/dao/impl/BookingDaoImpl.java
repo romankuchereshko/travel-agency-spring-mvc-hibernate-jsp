@@ -31,7 +31,7 @@ public class BookingDaoImpl implements BookingDao {
             return null;
         }
         log.info("Booking with id {} saved successfully! ", booking.getId());
-        return new BookingDto(booking.getRoom(), booking.getCheckIn(),booking.getCheckOut(), Status.ACTIVE);
+        return new BookingDto(booking.getRoom().getId(), booking.getCheckIn(),booking.getCheckOut(), Status.ACTIVE);
     }
 
     @Override
@@ -58,17 +58,17 @@ public class BookingDaoImpl implements BookingDao {
                 .getResultList();
     }
 
-    @Override
-    @SuppressWarnings("unchecked")
-    public List<Room> getRoomsBookedInHotelOnDate(Long hotelId, LocalDate checkIn, LocalDate checkOut) {
-        return sessionFactory.getCurrentSession()
-                .createQuery(
-                        "select b.room from Booking b where (b.checkIn <= :checkIn and  b.checkOut >= :checkOut) " +
-                                "and b.status = :status and b.room.hotel.id = :hotelId")
-                .setParameter("checkIn", checkIn)
-                .setParameter("checkOut", checkOut)
-                .setParameter("hotelId", hotelId)
-                .setParameter("status", Status.ACTIVE)
-                .getResultList();
-    }
+//    @Override
+//    @SuppressWarnings("unchecked")
+//    public List<Room> getRoomsBookedInHotelOnDate(Long hotelId, LocalDate checkIn, LocalDate checkOut) {
+//        return sessionFactory.getCurrentSession()
+//                .createQuery(
+//                        "select b.room from Booking b where (b.checkIn <= :checkIn and  b.checkOut >= :checkOut) " +
+//                                "and b.status = :status and b.room.hotel.id = :hotelId")
+//                .setParameter("checkIn", checkIn)
+//                .setParameter("checkOut", checkOut)
+//                .setParameter("hotelId", hotelId)
+//                .setParameter("status", Status.ACTIVE)
+//                .getResultList();
+//    }
 }

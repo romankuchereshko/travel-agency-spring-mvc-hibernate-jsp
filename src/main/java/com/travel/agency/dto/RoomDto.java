@@ -2,7 +2,6 @@ package com.travel.agency.dto;
 
 import com.travel.agency.dao.marker.Convertible;
 import com.travel.agency.model.BedPreference;
-import com.travel.agency.service.HotelService;
 import lombok.*;
 
 @AllArgsConstructor
@@ -15,7 +14,7 @@ public class RoomDto implements Convertible {
 
     private Long price;
 
-    private Integer guestCount;
+    private Integer guestsCount;
 
     private BedPreference bed;
 }

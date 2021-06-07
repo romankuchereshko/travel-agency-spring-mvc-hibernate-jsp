@@ -28,7 +28,7 @@ public class BookingServiceImpl implements BookingService {
 
     @Override
     public BookingDto book(Booking booking) {
-        BookingDto bookingDto = new BookingDto(booking.getRoom(), booking.getCheckIn(), booking.getCheckOut(), Status.ACTIVE);
+        BookingDto bookingDto = new BookingDto(booking.getRoom().getId(), booking.getCheckIn(), booking.getCheckOut(), Status.ACTIVE);
         if (roomService.checkIfRoomAvailableInHotel(bookingDto)) {
             return bookingDao.save(booking);
         }

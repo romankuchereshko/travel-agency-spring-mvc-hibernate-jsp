@@ -4,6 +4,7 @@ import com.travel.agency.dao.RoomDao;
 import com.travel.agency.dto.BookingDto;
 import com.travel.agency.dto.RoomDto;
 import com.travel.agency.model.Room;
+import com.travel.agency.model.Status;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -30,7 +31,7 @@ public class RoomDaoImpl implements RoomDao {
             return null;
         }
         log.info("Room with id {} added successfully! ", room.getId());
-        return new RoomDto(room.getHotel().getId(), room.getPrice(), room.getGuestsCount(), room.getBed());
+        return new RoomDto(null, room.getPrice(), room.getGuestsCount(), room.getBed());
     }
 
     @Override
@@ -60,6 +61,20 @@ public class RoomDaoImpl implements RoomDao {
         return sessionFactory.getCurrentSession()
                 .createQuery("from Room r where r.hotel.id=:id")
                 .setParameter("id", id)
+                .getResultList();
+    }
+
+//    @Override
+    @SuppressWarnings("unchecked")
+    public List<Room> getRoomsBookedInHotelOnDate(Long hotelId, LocalDate checkIn, LocalDate checkOut) {
+        return sessionFactory.getCurrentSession()
+                .createQuery(
+                        "select b.room from Booking b where (b.checkIn <= :checkIn and  b.checkOut >= :checkOut) " +
+                                "and b.status = :status and b.room.hotel.id = :hotelId")
+                .setParameter("checkIn", checkIn)
+                .setParameter("checkOut", checkOut)
+                .setParameter("hotelId", hotelId)
+                .setParameter("status", Status.ACTIVE)
                 .getResultList();
     }
 }

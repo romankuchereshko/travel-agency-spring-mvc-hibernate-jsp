@@ -48,7 +48,7 @@ public class HotelServiceImpl implements HotelService {
 
     @Override
     public List<Hotel> findByCountryId(Long id) {
-        return hotelDao.getAllHotels();
+        return hotelDao.findByCountryId(id);
     }
 
 //    @Override

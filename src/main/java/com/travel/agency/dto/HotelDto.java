@@ -7,7 +7,7 @@ import lombok.*;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
+//@Getter
 @Data
 public class HotelDto implements Convertible {
 //    private Long id;

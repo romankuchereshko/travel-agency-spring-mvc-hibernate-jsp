@@ -1,36 +1,6 @@
-<%--<%@ page language="java" contentType="text/html; charset=ISO-8859-1"--%>
-<%--         pageEncoding="ISO-8859-1" %>--%>
-<%--<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>--%>
-<%--<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>--%>
-
-<%--<html>--%>
-<%--<head>--%>
-<%--    <title>Add new hotel</title>--%>
-<%--</head>--%>
-<%--<body>--%>
-<%--<h2>Add new hotel</h2>--%>
-<%--<%@include file="header.html" %>--%>
-
-<%--<form:form method="post" modelAttribute="hotel">--%>
-<%--&lt;%&ndash;    <form:hidden path="id"/>&ndash;%&gt;--%>
-
-<%--    <form:label path="name">Name</form:label>--%>
-<%--    <form:input path="name" type="text" required="required"/>--%>
-<%--    <form:errors path="name" cssClass="text-warning"/>--%>
-
-<%--    <form:select path="country">--%>
-<%--        <form:option value="UKRAINE" label="Ukraine"/>--%>
-<%--        <form:option value="GERMANY" label="Germany"/>--%>
-<%--        <form:option value="POLAND" label="Poland"/>--%>
-<%--    </form:select>--%>
-<%--    <input type="submit" value="Submit"/>--%>
-<%--</form:form>--%>
-<%--</body>--%>
-<%--</html>--%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <html>
 <head>
     <title>Add hotel</title>

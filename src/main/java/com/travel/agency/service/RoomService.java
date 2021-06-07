@@ -4,6 +4,7 @@ import com.travel.agency.dto.BookingDto;
 import com.travel.agency.dto.RoomDto;
 import com.travel.agency.model.Room;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public interface RoomService {
@@ -16,4 +17,6 @@ public interface RoomService {
     List<Room> getAllRoomsByHotelId(Long id);
 
     boolean checkIfRoomAvailableInHotel(BookingDto bookingDto);
+
+//    List<Room> getRoomsBookedInHotelOnDate(Long hotelId, LocalDate checkIn, LocalDate checkOut);
 }

@@ -9,13 +9,13 @@
 <body>
 <h2>Add room</h2>
 <form:form action="/rooms/add" modelAttribute="room" method="post">
-    <p>
-        <label for="price">Room price</label>
-        <form:input path="price" type="number" id="price" placeholder="Price" required="true" min="1"/>
+    <input type="hidden" name="hotelId" value="${room.hotelId}">
+    <label for="price">Room price</label>
+    <form:input path="price" type="number" id="price" placeholder="Price" required="true" min="1"/>
     </p>
     <p>
-        <label for="guestCount">Guest count</label>
-        <form:input path="guestCount" type="number" id="guestCount" placeholder="Guests count" required="true" min="1"/>
+        <label for="guestsCount">Guest count</label>
+        <form:input path="guestsCount" type="" id="guestsCount" placeholder="Guest count" required="true" min="1"/>
     </p>
     <p>
         <label for="bed">Bed type</label>
