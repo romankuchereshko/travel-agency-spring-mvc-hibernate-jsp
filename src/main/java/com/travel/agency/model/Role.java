@@ -1,31 +1,26 @@
 package com.travel.agency.model;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
-import lombok.ToString;
-import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
-import javax.persistence.*;
-import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
-@Entity
-@Table(name = "roles")
-@Data
-@NoArgsConstructor
-@ToString
-public class Role {
+public enum Role {
+    ADMIN(Stream.of(Permission.ADMIN_PERMISSION, Permission.USER_PERMISSION).collect(Collectors.toSet())),
+    USER(Stream.of(Permission.USER_PERMISSION).collect(Collectors.toSet()));
 
-    @Id
-    @NonNull
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private final Set<Permission> permissions;
 
-    @NonNull
-    @Column(name = "name", nullable = false, unique = true)
-    private String name;
+    Role(Set<Permission> permissions) {
+        this.permissions = permissions;
+    }
 
-    @OneToMany(mappedBy = "role")
-    @ToString.Exclude
-    private List<User> users;
+    public Set<Permission> getPermissions() {
+        return permissions;
+    }
+
+    public Set<SimpleGrantedAuthority> getAuthorities() {
+        return getPermissions().stream().map(permission -> new SimpleGrantedAuthority(permission.getPermission())).collect(Collectors.toSet());
+    }
 }

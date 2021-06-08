@@ -20,7 +20,6 @@ public class Room implements Convertible {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    @Column
     private Long id;
 
     @Column(name = "room_price")

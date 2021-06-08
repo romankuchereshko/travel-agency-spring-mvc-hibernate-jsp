@@ -15,7 +15,6 @@ public class Booking implements Convertible {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    @Column
     private Long id;
 
     @Column(name = "checkin")
@@ -24,10 +23,6 @@ public class Booking implements Convertible {
     @Column(name = "checkout")
     private LocalDate checkOut;
 
-    @Column (name = "status")
-    @Enumerated(value = EnumType.STRING)
-    private Status status;
-
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "room_id")
     private Room room;
@@ -35,8 +30,4 @@ public class Booking implements Convertible {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
     private User user;
-
-//    @ManyToOne(fetch = FetchType.EAGER)
-//    @JoinColumn(name = "hotel_id")
-//    private Hotel hotel;
 }

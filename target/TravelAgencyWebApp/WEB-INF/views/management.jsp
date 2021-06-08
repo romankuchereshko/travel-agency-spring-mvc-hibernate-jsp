@@ -7,26 +7,11 @@
 </head>
 <body>
 <h2>Management</h2>
-<h3><a href="<c:url value="/hotels/all"/>">Hotels</a></h3>
 <table border="1" cellpadding="5">
-    <tr>
-        <th>Name</th>
-        <th>Email</th>
-        <th>Role</th>
-    </tr>
-    <c:choose>
-        <c:when test="${empty users}">
-            <h3>No users added yet.</h3>
-        </c:when>
-    </c:choose>
-    <c:forEach var="user" items="${users}">
-        <tr>
-            <th><c:out value="${user.name}"/></th>
-            <th><c:out value="${user.email}"/></th>
-            <th><c:out value="${user.role.name}"/></th>
-            <th><a href="<c:url value="/booking/all/${user.id}"/>">Bookings</a></th>
-        </tr>
-    </c:forEach>
+    <h2>Management menu</h2>
+    <p><a href="/hotels/hotelList">Hotels</a></p>
+    <p><a href="/users/all">Users</a></p>
+    <p><a href="/home">Back home</a></p>
 </table>
 </body>
 </html>

@@ -13,13 +13,9 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Data
 public class BookingDto implements Convertible {
-//    private Room room;
-
     private Long roomId;
 
     private LocalDate checkIn;
 
     private LocalDate checkOut;
-
-    private Status status;
 }

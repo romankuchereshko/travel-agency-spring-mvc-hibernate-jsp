@@ -22,14 +22,9 @@ public class UserController {
         this.userService = userService;
     }
 
-//    @GetMapping("/{id}/bookings")
-//    public String getUsersBookings(@PathVariable Long id, ) {
-//
-//    }
-
     @GetMapping("/all")
     public String getAll(Model model) {
         model.addAttribute("users", userService.getAllUsers());
-        return "redirect:/management";
+        return "users";
     }
 }

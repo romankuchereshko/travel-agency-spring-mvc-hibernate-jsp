@@ -4,11 +4,13 @@ import com.travel.agency.converter.DtoConverter;
 import com.travel.agency.dto.BookingDto;
 import com.travel.agency.dto.RoomDto;
 import com.travel.agency.model.BedPreference;
+import com.travel.agency.model.Hotel;
 import com.travel.agency.model.Room;
 import com.travel.agency.model.Status;
 import com.travel.agency.service.HotelService;
 import com.travel.agency.service.RoomService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -30,6 +32,7 @@ public class RoomController {
         this.dtoConverter = dtoConverter;
     }
 
+    @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping("/add/{hotel_id}")
     public String addRoom(@PathVariable(name = "hotel_id") Long hotelId, Model model) {
         model.addAttribute("room", new RoomDto().withHotelId(hotelId));
@@ -45,6 +48,17 @@ public class RoomController {
         return "all-rooms-in-hotel";
     }
 
+    @PreAuthorize("hasAuthority('ADMIN')")
+    @GetMapping("/deleteRoom/{id}")
+    public String deleteRoom(Model model, @PathVariable Long id) {
+        Hotel hotel = roomService.findById(id).getHotel();
+        List<Room> rooms = roomService.getAllRoomsByHotelId(hotel.getId());
+        roomService.delete(id);
+        model.addAttribute("rooms", rooms);
+        return "all-rooms-in-hotel";
+    }
+
+    @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping("/all_rooms_in_hotel/{id}")
     public String allHotelRooms(@PathVariable Long id, Model model) {
         List<Room> rooms = roomService.getAllRoomsByHotelId(id);
@@ -61,7 +75,7 @@ public class RoomController {
         boolean isAvailable;
         try {
             isAvailable = roomService.checkIfRoomAvailableInHotel(
-                    new BookingDto(roomId, LocalDate.parse(checkIn), LocalDate.parse(checkOut), Status.NOT_ACTIVE));
+                    new BookingDto(roomId, LocalDate.parse(checkIn), LocalDate.parse(checkOut)));
         } catch (IllegalArgumentException e) {
             model.addAttribute("errorMessage", e.getMessage());
             model.addAttribute("rooms", roomService.getAllRoomsByHotelId(hotelId));

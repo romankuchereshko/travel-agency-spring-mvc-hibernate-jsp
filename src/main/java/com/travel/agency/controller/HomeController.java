@@ -4,10 +4,7 @@ import com.travel.agency.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
 
@@ -19,14 +16,29 @@ public class HomeController {
         this.userService = userService;
     }
 
-    @RequestMapping(value = {"/", "/home"}, method = RequestMethod.GET)
+    @GetMapping("/home")
     public String home() {
         return "home";
+    }
+
+    @GetMapping({"/login", "/"})
+    public String loginForm(Model model, @RequestParam(value = "error", required = false) String error) {
+        boolean errorMessage = false;
+        if (error != null) {
+            errorMessage = true;
+        }
+        model.addAttribute("errorMessage", errorMessage);
+        return "login";
     }
 
     @GetMapping("/management")
     public String managementAllUsers(Model model) {
         model.addAttribute("users", userService.getAllUsers());
         return "management";
+    }
+
+    @GetMapping("/success")
+    public String getSuccessfulMessage() {
+        return "success";
     }
 }

@@ -21,7 +21,6 @@ public class Hotel implements Convertible {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    @Column
     private Long id;
 
     @Column(name = "hotel_name")

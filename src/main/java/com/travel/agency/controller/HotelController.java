@@ -10,6 +10,7 @@ import com.travel.agency.service.HotelService;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -32,14 +33,16 @@ public class HotelController {
         this.dtoConverter = dtoConverter;
     }
 
+    @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping("/add")
-    public String addHotelForm(Model model) {
+    public String addHotel(Model model) {
         model.addAttribute("hotel", new HotelDto());
         model.addAttribute("countries", countryService.getAllCountries());
         model.addAttribute("types", AccommodationType.values());
         return "add-hotel";
     }
 
+    @PreAuthorize("hasAuthority('ADMIN')")
     @PostMapping("/add")
     public String addHotel(@ModelAttribute HotelDto hotelDto, @RequestParam("countryId") Long countryId) {
         hotelDto.setCountry(countryService.findById(countryId));
@@ -48,12 +51,14 @@ public class HotelController {
         return "redirect:/hotels/all";
     }
 
+    @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping("/delete/{id}")
     public String deleteHotel(@PathVariable Long id) {
         hotelService.delete(id);
         return "redirect:/hotels/all";
     }
 
+    @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping("/all")
     public String getAllHotels(Model model) {
         model.addAttribute("hotels", hotelService.getAllHotels());

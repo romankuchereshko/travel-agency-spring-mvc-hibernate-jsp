@@ -70,11 +70,10 @@ public class RoomDaoImpl implements RoomDao {
         return sessionFactory.getCurrentSession()
                 .createQuery(
                         "select b.room from Booking b where (b.checkIn <= :checkIn and  b.checkOut >= :checkOut) " +
-                                "and b.status = :status and b.room.hotel.id = :hotelId")
+                                "and b.room.hotel.id = :hotelId")
                 .setParameter("checkIn", checkIn)
                 .setParameter("checkOut", checkOut)
                 .setParameter("hotelId", hotelId)
-                .setParameter("status", Status.ACTIVE)
                 .getResultList();
     }
 }

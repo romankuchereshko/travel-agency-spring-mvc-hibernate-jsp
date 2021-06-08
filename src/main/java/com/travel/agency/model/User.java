@@ -19,7 +19,6 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    @Column
     private Long id;
 
     @Pattern(regexp = "[A-Z][a-z]+",
@@ -36,13 +35,14 @@ public class User {
     @Column(nullable = false)
     private String password;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "role_id")
+    @Enumerated(value = EnumType.STRING)
+    @Column()
+    private Status status;
+
+    @Enumerated(value = EnumType.STRING)
+    @Column()
     private Role role;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user",fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user", fetch = FetchType.EAGER)
     private List<Booking> bookings;
-
-//    @OneToMany(mappedBy = "guest", cascade = CascadeType.REMOVE)
-//    private List<Room> myRooms;
 }

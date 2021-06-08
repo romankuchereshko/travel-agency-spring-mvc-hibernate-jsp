@@ -31,7 +31,7 @@ public class BookingDaoImpl implements BookingDao {
             return null;
         }
         log.info("Booking with id {} saved successfully! ", booking.getId());
-        return new BookingDto(booking.getRoom().getId(), booking.getCheckIn(),booking.getCheckOut(), Status.ACTIVE);
+        return new BookingDto(booking.getRoom().getId(), booking.getCheckIn(),booking.getCheckOut());
     }
 
     @Override

@@ -12,6 +12,7 @@ import com.travel.agency.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
@@ -46,11 +47,11 @@ public class BookingController {
                        Principal principal) {
         Room room = roomService.findById(roomId);
         User user = userService.getByName(principal.getName());
-        Booking booking = dtoConverter.convertToEntity(new BookingDto(roomId, checkin, checkout, Status.ACTIVE), new Booking());
+        Booking booking = dtoConverter.convertToEntity(new BookingDto(roomId, checkin, checkout), new Booking());
         booking.setRoom(room);
         booking.setUser(user);
         bookingService.book(booking);
-        return "success";
+        return "redirect:/success";
     }
 
     @GetMapping("/delete/{id}")
@@ -60,6 +61,7 @@ public class BookingController {
             return "redirect:/booking/all/" + userId;
     }
 
+    @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping("/all/{id}")
     public String getAllBookingsByUserId(@PathVariable("id") Long userId, Model model) {
             model.addAttribute("all", bookingService.getBookingsByUserId(userId));

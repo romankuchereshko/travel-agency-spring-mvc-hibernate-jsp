@@ -6,7 +6,7 @@
 </head>
 <body>
 <h1>Management</h1>
-<table>
+<table border="1">
     <c:forEach var="booking" items="${all}">
         <tr>
             <th>Room</th>
@@ -20,6 +20,7 @@
             <td><c:out value="${booking.checkIn}"/></td>
             <td><c:out value="${booking.checkOut}"/></td>
         </tr>
+        <td><a href="/booking/delete/${booking.id}}">Cancel booking</a></td>
     </c:forEach>
     <c:if test="${empty all}">
         no bookings added yet.
