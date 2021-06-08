@@ -28,15 +28,10 @@
                 </tr>
                 <c:set var="hotelId" value="${room.hotel.id}"/>
             </c:forEach>
-            <tr>
-                <td align="center" ><a href="/rooms/add/${hotelId}">Add room</a></td>
-            </tr>
-            <tr>
-                <td align="center" ><a href="/home">Back home</a></td>
-            </tr>
             </tbody>
 
         </table>
+        <p><a href="/rooms/add/${hotelId}">Add room</a></p>
         <p><a href="/home">Back home</a></p>
     </div>
 

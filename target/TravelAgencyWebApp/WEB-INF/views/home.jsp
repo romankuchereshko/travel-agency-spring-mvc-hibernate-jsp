@@ -7,7 +7,7 @@
 <body>
 <h2>Welcome to Travel Agency</h2>
 <form action="/home" method="post">
-    <p><a href="/country/countries">Find hotels</a></p>
+    <p><a href="/country/countries">Hotels</a></p>
 
     <sec:authorize access="hasAuthority('ADMIN')">
         <p><a href="/management">Management</a></p>

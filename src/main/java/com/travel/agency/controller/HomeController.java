@@ -1,6 +1,7 @@
 package com.travel.agency.controller;
 
 import com.travel.agency.service.UserService;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,6 +30,7 @@ public class HomeController {
         return "login";
     }
 
+    @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping("/management")
     public String managementAllUsers(Model model) {
         model.addAttribute("users", userService.getAllUsers());

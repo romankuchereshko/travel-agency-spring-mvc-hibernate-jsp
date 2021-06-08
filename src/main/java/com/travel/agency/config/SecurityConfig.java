@@ -30,25 +30,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         this.userDetailsService = userDetailsService;
     }
 
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http.
-                csrf().disable().
-                authorizeRequests().antMatchers("/").permitAll().
-                anyRequest().authenticated().
-                and().
-                formLogin().
-                loginPage("/login").
-                defaultSuccessUrl("/home").
-                failureUrl("/login?error=true").permitAll().
-                and().
-                logout().
-                logoutRequestMatcher(new AntPathRequestMatcher("/home", "POST")).
-                clearAuthentication(true).
-                deleteCookies("JSESSIONID").
-                logoutSuccessUrl("/login");
-    }
-
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -66,5 +47,24 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     protected PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder(12);
+    }
+
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http.
+                csrf().disable().
+                authorizeRequests().antMatchers("/").permitAll().
+                anyRequest().authenticated().
+                and().
+                formLogin().
+                loginPage("/login").
+                defaultSuccessUrl("/home").
+                failureUrl("/login?error=true").permitAll().
+                and().
+                logout().
+                logoutRequestMatcher(new AntPathRequestMatcher("/home", "POST")).
+                clearAuthentication(true).
+                deleteCookies("JSESSIONID").
+                logoutSuccessUrl("/login");
     }
 }

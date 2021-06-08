@@ -27,7 +27,7 @@
             <tr>
                 <td align="center">${room.id}</td>
                 <td align="center">${room.guestsCount}</td>
-                <td align="center">${room.price}</td>
+                <td align="center">${room.price}$</td>
                 <td align="center">${room.bed.toString()}</td>
                 <td>
                     <form action="/rooms/available_room/${room.id}" method="post">
@@ -50,6 +50,7 @@
         </c:forEach>
         </tbody>
     </table>
+    <p><a href="/home">Back home</a></p>
 </div>
 
 </body>
