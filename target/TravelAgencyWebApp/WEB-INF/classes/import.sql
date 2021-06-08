@@ -5,6 +5,11 @@ insert into countries (name) values ('UKRAINE');
 insert into hotels (hotel_name, type, rate, wifi, pool, pets, smoking, country_id) values ('Grand Hotel Tremezzo', 'HOTEL', 5, true, true, true, false, 1);
 insert into hotels (hotel_name, type, rate, wifi, pool, pets, smoking, country_id) values ('Mandarin Oriental', 'HOTEL', 5, true, false, true, false, 2);
 insert into hotels (hotel_name, type, rate, wifi, pool, pets, smoking, country_id) values ('InterContinental', 'HOTEL', 4, true, false, true, true, 3);
+insert into hotels (hotel_name, type, rate, wifi, pool, pets, smoking, country_id) values ('Monastero Santa Rosa Hotel & Spa', 'HOTEL', 5, true, true, true, true, 1);
+insert into hotels (hotel_name, type, rate, wifi, pool, pets, smoking, country_id) values ('Stara Pravda Villas', 'VILLA', 4, true, true, true, true, 3);
+insert into hotels (hotel_name, type, rate, wifi, pool, pets, smoking, country_id) values ('HeyMi Apartments in City Center', 'APARTMENT', 5, true, false, false, false, 1);
+insert into hotels (hotel_name, type, rate, wifi, pool, pets, smoking, country_id) values ('Rosenberger Seminar-Hotel Deutsch-Wagram', 'MOTEL', 3, false, true, false, true, 2);
+insert into hotels (hotel_name, type, rate, wifi, pool, pets, smoking, country_id) values ('Pension Neuer Markt', 'PENSION', 4, true, false, false, false, 2);
 
 insert into users (name, email, password, status, role) values ('admin', 'admin@gmail.com', '$2y$12$6wWu.bjCJegev7tg3l0R9.ZUxKbMyIA2HsMkOwmrT4CnQ75ldJhN6', 'ACTIVE', 'ADMIN');
 insert into users (name, email, password, status, role) values ('Nora', 'nora@gmail.com', '$2y$12$2bu5olbBfNziKL2DEg6Dj.WvdKD35uUjaD4CmJvplsBT.C3N6VtCy', 'ACTIVE', 'USER');

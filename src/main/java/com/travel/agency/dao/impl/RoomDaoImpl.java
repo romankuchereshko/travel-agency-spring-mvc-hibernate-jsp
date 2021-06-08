@@ -64,7 +64,7 @@ public class RoomDaoImpl implements RoomDao {
                 .getResultList();
     }
 
-//    @Override
+    @Override
     @SuppressWarnings("unchecked")
     public List<Room> getRoomsBookedInHotelOnDate(Long hotelId, LocalDate checkIn, LocalDate checkOut) {
         return sessionFactory.getCurrentSession()

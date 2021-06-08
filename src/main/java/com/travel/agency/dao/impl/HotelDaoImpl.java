@@ -79,16 +79,4 @@ public class HotelDaoImpl implements HotelDao {
                 .setParameter("id", id)
                 .getResultList();
     }
-
-//    @SuppressWarnings("unchecked")
-//    @Override
-//    public List<Hotel> getHotelsInCurrentCountry(String country) {
-//        List<Hotel> allHotels = sessionFactory.getCurrentSession()
-//                .createQuery("from User")
-//                .getResultList();
-//        return allHotels.stream()
-//                .filter(hotel -> hotel.getCountry().name().equals(country))
-//                .peek(hotel -> log.info("Hotel List::" + hotel))
-//                .collect(Collectors.toList());
-//    }
 }

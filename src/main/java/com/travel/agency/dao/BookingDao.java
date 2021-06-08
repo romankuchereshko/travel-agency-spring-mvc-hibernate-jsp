@@ -15,6 +15,4 @@ public interface BookingDao {
     Booking getByUserId(Long id);
 
     List<Booking> getAllBookings();
-
-//    List<Room> getRoomsBookedInHotelOnDate(Long hotelId, LocalDate checkIn, LocalDate checkOut);
 }

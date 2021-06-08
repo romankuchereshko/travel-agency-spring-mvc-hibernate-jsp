@@ -6,7 +6,6 @@ import com.travel.agency.dto.RoomDto;
 import com.travel.agency.model.BedPreference;
 import com.travel.agency.model.Hotel;
 import com.travel.agency.model.Room;
-import com.travel.agency.model.Status;
 import com.travel.agency.service.HotelService;
 import com.travel.agency.service.RoomService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,15 +40,16 @@ public class RoomController {
     }
 
     @PostMapping("/add")
-    public String addRoom(@ModelAttribute RoomDto roomDto, @RequestParam(value = "hotelId") Long hotelId) {
+    public String addRoom(@ModelAttribute RoomDto roomDto, @RequestParam(value = "hotelId") Long hotelId, Model model) {
         Room room = dtoConverter.convertToEntity(roomDto.withHotelId(hotelId), new Room());
         room.setHotel(hotelService.findById(roomDto.getHotelId()));
         roomService.add(room);
+        model.addAttribute("rooms", roomService.getAllRoomsByHotelId(hotelId));
         return "all-rooms-in-hotel";
     }
 
     @PreAuthorize("hasAuthority('ADMIN')")
-    @GetMapping("/deleteRoom/{id}")
+    @GetMapping("/delete/{id}")
     public String deleteRoom(Model model, @PathVariable Long id) {
         Hotel hotel = roomService.findById(id).getHotel();
         List<Room> rooms = roomService.getAllRoomsByHotelId(hotel.getId());
@@ -58,7 +58,6 @@ public class RoomController {
         return "all-rooms-in-hotel";
     }
 
-    @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping("/all_rooms_in_hotel/{id}")
     public String allHotelRooms(@PathVariable Long id, Model model) {
         List<Room> rooms = roomService.getAllRoomsByHotelId(id);

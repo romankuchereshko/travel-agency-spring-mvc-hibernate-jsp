@@ -50,15 +50,4 @@ public class HotelServiceImpl implements HotelService {
     public List<Hotel> findByCountryId(Long id) {
         return hotelDao.findByCountryId(id);
     }
-
-//    @Override
-//    public List<Hotel> getHotelsInCurrentCountry(String country) {
-//        List<Hotel> hotels = hotelDao.getAllHotels().stream()
-//                .filter(hotel -> hotel.getCountry().toString().equals(country))
-//                .collect(Collectors.toList());
-//        if (hotels.isEmpty()) {
-//            return new ArrayList<>();
-//        }
-//        return hotels;
-//    }
 }

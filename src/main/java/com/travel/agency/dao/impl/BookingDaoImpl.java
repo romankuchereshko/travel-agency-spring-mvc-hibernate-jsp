@@ -4,13 +4,12 @@ import com.travel.agency.dao.BookingDao;
 import com.travel.agency.dto.BookingDto;
 import com.travel.agency.model.Booking;
 import com.travel.agency.model.Room;
-import com.travel.agency.model.Status;
+import com.travel.agency.model.User;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
 
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.util.List;
 
 @Repository
@@ -31,7 +30,7 @@ public class BookingDaoImpl implements BookingDao {
             return null;
         }
         log.info("Booking with id {} saved successfully! ", booking.getId());
-        return new BookingDto(booking.getRoom().getId(), booking.getCheckIn(),booking.getCheckOut());
+        return new BookingDto(booking.getRoom().getId(), booking.getCheckIn(), booking.getCheckOut());
     }
 
     @Override
@@ -44,6 +43,8 @@ public class BookingDaoImpl implements BookingDao {
         Booking booking = sessionFactory.getCurrentSession().load(Booking.class, id);
 
         if (booking != null) {
+            booking.setRoom(null);
+            booking.setUser(null);
             sessionFactory.getCurrentSession().delete(booking);
             log.info("Booking with id {} canceled successfully!", id);
         } else {
@@ -57,18 +58,4 @@ public class BookingDaoImpl implements BookingDao {
                 .createQuery("SELECT b FROM Booking b ORDER BY b.id", Booking.class)
                 .getResultList();
     }
-
-//    @Override
-//    @SuppressWarnings("unchecked")
-//    public List<Room> getRoomsBookedInHotelOnDate(Long hotelId, LocalDate checkIn, LocalDate checkOut) {
-//        return sessionFactory.getCurrentSession()
-//                .createQuery(
-//                        "select b.room from Booking b where (b.checkIn <= :checkIn and  b.checkOut >= :checkOut) " +
-//                                "and b.status = :status and b.room.hotel.id = :hotelId")
-//                .setParameter("checkIn", checkIn)
-//                .setParameter("checkOut", checkOut)
-//                .setParameter("hotelId", hotelId)
-//                .setParameter("status", Status.ACTIVE)
-//                .getResultList();
-//    }
 }

@@ -4,11 +4,9 @@ import com.travel.agency.dao.UserDao;
 import com.travel.agency.model.Booking;
 import com.travel.agency.model.User;
 import lombok.extern.slf4j.Slf4j;
-import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
 
-import javax.persistence.TypedQuery;
 import java.util.List;
 
 @Repository
@@ -55,13 +53,8 @@ public class UserDaoImpl implements UserDao {
     @SuppressWarnings("unchecked")
     public List<Booking> getUserBookingsById(Long id) {
         return sessionFactory.getCurrentSession()
-                .createQuery("from Booking b where b.user.id=:id")
+                .createQuery("FROM Booking b WHERE b.user.id=:id")
                 .setParameter("id", id)
                 .getResultList();
     }
-
-//    @Override
-//    public List<User> getAllUsers() {
-//        return sessionFactory.getCurrentSession().createQuery("SELECT u FROM User u ORDER BY u.id", User.class).getResultList();
-//    }
 }

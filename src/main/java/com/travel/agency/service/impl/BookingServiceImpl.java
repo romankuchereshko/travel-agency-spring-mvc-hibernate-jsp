@@ -3,7 +3,6 @@ package com.travel.agency.service.impl;
 import com.travel.agency.dao.BookingDao;
 import com.travel.agency.dto.BookingDto;
 import com.travel.agency.model.Booking;
-import com.travel.agency.model.Status;
 import com.travel.agency.service.BookingService;
 import com.travel.agency.service.RoomService;
 import org.springframework.beans.factory.annotation.Autowired;

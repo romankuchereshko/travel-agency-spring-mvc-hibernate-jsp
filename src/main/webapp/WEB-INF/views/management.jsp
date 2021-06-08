@@ -8,8 +8,7 @@
 <body>
 <h2>Management</h2>
 <table border="1" cellpadding="5">
-    <h2>Management menu</h2>
-    <p><a href="/hotels/hotelList">Hotels</a></p>
+    <p><a href="/hotels/all">Hotels</a></p>
     <p><a href="/users/all">Users</a></p>
     <p><a href="/home">Back home</a></p>
 </table>

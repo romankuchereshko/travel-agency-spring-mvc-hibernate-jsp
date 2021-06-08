@@ -19,13 +19,13 @@
             <td><c:out value="${booking.room.hotel.name}"/></td>
             <td><c:out value="${booking.checkIn}"/></td>
             <td><c:out value="${booking.checkOut}"/></td>
+            <td><a href="/booking/delete/${booking.id}">Cancel booking</a></td>
         </tr>
-        <td><a href="/booking/delete/${booking.id}}">Cancel booking</a></td>
     </c:forEach>
     <c:if test="${empty all}">
-        no bookings added yet.
+        User don't have any bookings :(
     </c:if>
 </table>
-<a href="/home">Back home</a>
+<p><a href="/home">Back home</a></p>
 </body>
 </html>

@@ -9,7 +9,7 @@
 <div>
     <div>
         <h2>All Rooms</h2>
-        <table>
+        <table border="1">
             <thead>
             <tr>
                 <th>Room id</th>
@@ -22,7 +22,7 @@
             <c:forEach var="room" items="${rooms}">
                 <tr>
                     <td align="center" >${room.id}</td>
-                    <td align="center">${room.price}</td>
+                    <td align="center">${room.price}$</td>
                     <td align="center">${room.guestsCount}</td>
                     <td align="center">${room.bed.toString()}</td>
                 </tr>
@@ -30,6 +30,9 @@
             </c:forEach>
             <tr>
                 <td align="center" ><a href="/rooms/add/${hotelId}">Add room</a></td>
+            </tr>
+            <tr>
+                <td align="center" ><a href="/home">Back home</a></td>
             </tr>
             </tbody>
 

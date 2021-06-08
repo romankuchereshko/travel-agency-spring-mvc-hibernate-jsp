@@ -4,19 +4,14 @@ import com.travel.agency.converter.DtoConverter;
 import com.travel.agency.dto.HotelDto;
 import com.travel.agency.model.AccommodationType;
 import com.travel.agency.model.Hotel;
-import com.travel.agency.service.BookingService;
 import com.travel.agency.service.CountryService;
 import com.travel.agency.service.HotelService;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.Date;
 import java.util.List;
 
 @Controller

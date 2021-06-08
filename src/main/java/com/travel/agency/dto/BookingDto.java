@@ -1,8 +1,6 @@
 package com.travel.agency.dto;
 
 import com.travel.agency.dao.marker.Convertible;
-import com.travel.agency.model.Room;
-import com.travel.agency.model.Status;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

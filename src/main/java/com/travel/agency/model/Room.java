@@ -1,7 +1,6 @@
 package com.travel.agency.model;
 
 import com.travel.agency.dao.marker.Convertible;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;

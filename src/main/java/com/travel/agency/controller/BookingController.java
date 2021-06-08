@@ -4,23 +4,19 @@ import com.travel.agency.converter.DtoConverter;
 import com.travel.agency.dto.BookingDto;
 import com.travel.agency.model.Booking;
 import com.travel.agency.model.Room;
-import com.travel.agency.model.Status;
 import com.travel.agency.model.User;
 import com.travel.agency.service.BookingService;
 import com.travel.agency.service.RoomService;
 import com.travel.agency.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 import java.time.LocalDate;
-import java.util.List;
 
 @Controller
 @RequestMapping("/booking")
@@ -56,16 +52,16 @@ public class BookingController {
 
     @GetMapping("/delete/{id}")
     public String cancelBooking(@PathVariable("id") Long bookingId) {
-            bookingService.cancel(bookingId);
-            Long userId = bookingService.getBookingById(bookingId).getUser().getId();
-            return "redirect:/booking/all/" + userId;
+        bookingService.cancel(bookingId);
+        Long userId = bookingService.getBookingById(bookingId).getUser().getId();
+        return "redirect:/booking/all/" + userId;
     }
 
     @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping("/all/{id}")
     public String getAllBookingsByUserId(@PathVariable("id") Long userId, Model model) {
-            model.addAttribute("all", bookingService.getBookingsByUserId(userId));
-            model.addAttribute("user", userService.getById(userId));
+        model.addAttribute("all", bookingService.getBookingsByUserId(userId));
+        model.addAttribute("user", userService.getById(userId));
         return "bookings-list";
     }
 }

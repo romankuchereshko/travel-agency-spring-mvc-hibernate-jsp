@@ -5,7 +5,7 @@
     <title>Users</title>
 </head>
 <body>
-<table>
+<table border="1">
     <tr>
         <th>Name</th>
         <th>Email</th>
@@ -15,7 +15,7 @@
         <tr>
             <th><c:out value="${user.name}"/></th>
             <th><c:out value="${user.email}"/></th>
-            <th><c:out value="${user.role.name}"/></th>
+            <th><c:out value="${user.role.toString()}"/></th>
             <th><a href="<c:url value="/booking/all/${user.id}"/>">Bookings</a></th>
         </tr>
     </c:forEach>

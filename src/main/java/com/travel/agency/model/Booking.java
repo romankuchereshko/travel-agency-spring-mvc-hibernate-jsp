@@ -1,7 +1,9 @@
 package com.travel.agency.model;
 
 import com.travel.agency.dao.marker.Convertible;
-import lombok.*;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.time.LocalDate;
